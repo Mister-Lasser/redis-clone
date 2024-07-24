@@ -18,18 +18,18 @@ static void msg(const char *msg) {
 
 static void die(const char* msg) {
     int err = errno;
-    fprintf(stderr, "%s\n", msg);
+    fprintf(stderr, "[%d] %s\n", err, msg);
     abort();
 }
 
 static void do_something(int conn_fd) {
     char rbuf[64] = {};
-    ssize_t n = read(conn_fd, buffer, sizeof(buffer)-1);
+    ssize_t n = read(conn_fd, rbuf, sizeof(rbuf)-1);
     if (n<0) {
         msg("read() error");
         return;
     }
-    printf("client says: %s\n", buffer);
+    printf("client says: %s\n", rbuf);
 
     char wbuf[] = "world";
     write(conn_fd, wbuf, strlen(wbuf));
