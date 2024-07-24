@@ -89,5 +89,6 @@ int main() {
         do_something(conn_fd);
         close(conn_fd);
     }
+    close(server_fd);
     return 0;
 }
